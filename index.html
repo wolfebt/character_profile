@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Profile Builder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .form-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        .form-field {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #374151;
+            display: flex;
+            align-items: center;
+        }
+        input[type="checkbox"] {
+            margin-right: 0.5rem;
+            height: 1rem;
+            width: 1rem;
+            accent-color: #4f46e5;
+        }
+        input[type="text"], textarea {
+            border-radius: 0.5rem;
+            border: 1px solid #d1d5db;
+            padding: 0.75rem 1rem;
+            transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+        }
+        input[type="text"]:focus, textarea:focus {
+            outline: none;
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.3);
+        }
+        .populated {
+            background-color: #e5e7eb;
+            border-color: #9ca3af;
+        }
+        .error-message {
+            color: #dc2626;
+            background-color: #fee2e2;
+            border-left: 4px solid #b91c1c;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 0.375rem;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <header class="text-center mb-10">
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900">Character Profile Builder</h1>
+            <p class="mt-3 text-md sm:text-lg text-gray-600 max-w-2xl mx-auto">Check the boxes for AI generation or fill in the fields with your own data.</p>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Input Form Section -->
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <form id="character-form" class="space-y-8">
+                    <div class="form-section">
+                        <div class="form-field">
+                            <label for="name"><input type="checkbox" id="cb-name" name="cb-name" checked>Name</label>
+                            <input type="text" id="name" name="name" placeholder="e.g., Alistair Croft">
+                        </div>
+                        <div class="form-field">
+                            <label for="genre"><input type="checkbox" id="cb-genre" name="cb-genre" checked>Genre</label>
+                            <input type="text" id="genre" name="genre" placeholder="e.g., Sci-Fi, Fantasy, Noir">
+                        </div>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="core-description"><input type="checkbox" id="cb-core-description" name="cb-core-description" checked>Core Description</label>
+                        <textarea id="core-description" name="core-description" rows="3" placeholder="A high-level summary of the character."></textarea>
+                    </div>
+                    
+                    <div class="form-field">
+                        <label for="appearance"><input type="checkbox" id="cb-appearance" name="cb-appearance" checked>Appearance</label>
+                        <textarea id="appearance" name="appearance" rows="4" placeholder="Describe their physical looks, clothing, and style."></textarea>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="backstory"><input type="checkbox" id="cb-backstory" name="cb-backstory" checked>Backstory</label>
+                        <textarea id="backstory" name="backstory" rows="5" placeholder="Detail their history, significant life events, and origins."></textarea>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="personality"><input type="checkbox" id="cb-personality" name="cb-personality" checked>Personality Traits</label>
+                        <textarea id="personality" name="personality" rows="3" placeholder="e.g., Witty, cautious, fiercely loyal..."></textarea>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="form-field">
+                            <label for="skills"><input type="checkbox" id="cb-skills" name="cb-skills" checked>Skills</label>
+                            <input type="text" id="skills" name="skills" placeholder="e.g., Lockpicking, alchemy">
+                        </div>
+                        <div class="form-field">
+                            <label for="abilities"><input type="checkbox" id="cb-abilities" name="cb-abilities" checked>Abilities</label>
+                            <input type="text" id="abilities" name="abilities" placeholder="e.g., Minor pyromancy">
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                         <div class="form-field">
+                            <label for="goals"><input type="checkbox" id="cb-goals" name="cb-goals" checked>Goals</label>
+                            <textarea id="goals" name="goals" rows="3" placeholder="Short-term and long-term goals."></textarea>
+                        </div>
+                        <div class="form-field">
+                            <label for="motivations"><input type="checkbox" id="cb-motivations" name="cb-motivations" checked>Motivations</label>
+                            <textarea id="motivations" name="motivations" rows="3" placeholder="What drives them?"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="weaknesses"><input type="checkbox" id="cb-weaknesses" name="cb-weaknesses" checked>Weaknesses</label>
+                        <input type="text" id="weaknesses" name="weaknesses" placeholder="e.g., Fear of heights, overly trusting">
+                    </div>
+
+                    <div class="form-field">
+                        <label for="equipment"><input type="checkbox" id="cb-equipment" name="cb-equipment" checked>Equipment</label>
+                        <textarea id="equipment" name="equipment" rows="3" placeholder="What items do they carry?"></textarea>
+                    </div>
+                    
+                    <div class="form-field">
+                        <label for="relationships"><input type="checkbox" id="cb-relationships" name="cb-relationships" checked>Relationships</label>
+                        <textarea id="relationships" name="relationships" rows="4" placeholder="Family, friends, rivals, etc."></textarea>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="notes"><input type="checkbox" id="cb-notes" name="cb-notes" checked>Additional Notes</label>
+                        <textarea id="notes" name="notes" rows="4" placeholder="Any other important details, quirks, or information."></textarea>
+                    </div>
+
+                     <div class="flex items-center justify-end mt-8 space-x-3">
+                        <select id="output-format" name="output-format" class="text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                            <option>Character Workup</option>
+                            <option>Markdown</option>
+                            <option>JSON</option>
+                        </select>
+                        <button type="button" id="reformat-btn" class="hidden inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                            Reformat
+                        </button>
+                        <button type="button" id="generate-btn" class="inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            Generate
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Output Section -->
+            <div class="bg-white p-6 rounded-xl shadow-lg h-full">
+                <div class="flex justify-between items-center mb-4 border-b pb-2">
+                    <h2 class="text-2xl font-bold">Generated Prompt</h2>
+                    <div class="flex space-x-2">
+                        <button id="copy-btn" class="py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">Copy</button>
+                        <button id="save-btn" class="py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">Save as .txt</button>
+                    </div>
+                </div>
+                <div id="output-container" class="bg-gray-50 p-4 rounded-md h-[calc(100%-80px)] overflow-y-auto">
+                    <div id="loading" class="hidden flex justify-center items-center h-full">
+                        <div class="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-indigo-500"></div>
+                    </div>
+                    <pre id="output" class="whitespace-pre-wrap text-sm text-gray-800"></pre>
+                </div>
+                 <p id="copy-feedback" class="text-sm text-green-600 mt-2 h-4"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const apiKey = "AIzaSyAdECl3fbG0IdbJyJGjq2lbfLoSVdE69EU";
+
+            // --- UI Elements ---
+            const form = document.getElementById('character-form');
+            const generateBtn = document.getElementById('generate-btn');
+            const reformatBtn = document.getElementById('reformat-btn');
+            const copyBtn = document.getElementById('copy-btn');
+            const saveBtn = document.getElementById('save-btn');
+            const outputEl = document.getElementById('output');
+            const loadingEl = document.getElementById('loading');
+            const copyFeedbackEl = document.getElementById('copy-feedback');
+            const nameInput = document.getElementById('name');
+
+            const fieldOrder = [
+                'name', 'genre', 'core-description', 'appearance', 'backstory', 'personality', 
+                'skills', 'abilities', 'goals', 'motivations', 'weaknesses', 
+                'equipment', 'relationships', 'notes'
+            ];
+            
+            // --- Shared API Call Function ---
+            async function callGemini(prompt) {
+                loadingEl.classList.remove('hidden');
+                outputEl.textContent = '';
+                
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                const payload = { contents: [{ parts: [{ text: prompt }] }] };
+
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        const errorData = await response.json().catch(() => ({}));
+                        const errorMsg = errorData.error?.message || 'An unknown error occurred.';
+                        displayError(`API Request Failed (Status: ${response.status})`, errorMsg);
+                        return null;
+                    }
+
+                    const result = await response.json();
+                    return result.candidates?.[0]?.content?.parts?.[0]?.text || "No content generated. Please try adjusting your inputs.";
+                } catch (error) {
+                    console.error("Error during API call:", error);
+                    displayError("An unexpected error occurred.", `Failed to connect to the API. Check your network connection. Error: ${error.message}`);
+                    return null;
+                } finally {
+                    loadingEl.classList.add('hidden');
+                }
+            }
+
+
+            // --- UI Interaction Logic ---
+            function displayError(message, details = '') {
+                outputEl.innerHTML = `<div class="error-message"><p class="font-bold">${message}</p><p class="text-sm mt-2">${details}</p></div>`;
+            }
+            
+            fieldOrder.forEach(id => {
+                const input = document.getElementById(id);
+                const checkbox = document.getElementById(`cb-${id}`);
+                
+                input.addEventListener('input', () => {
+                    if (input.value.trim() !== '') {
+                        input.classList.add('populated');
+                        checkbox.checked = false;
+                    } else {
+                        input.classList.remove('populated');
+                    }
+                    // Show generate button if user edits form
+                    reformatBtn.classList.add('hidden');
+                    generateBtn.classList.remove('hidden');
+                });
+            });
+
+            // --- Primary Functions (Generate, Reformat) ---
+            async function generatePrompt() {
+                const formData = new FormData(form);
+                const fieldMapping = {
+                    'name': 'Name', 'genre': 'Genre', 'core-description': 'Core Description', 'personality': 'Personality Traits', 'appearance': 'Appearance', 'backstory': 'Backstory', 'skills': 'Skills', 'abilities': 'Abilities', 'goals': 'Goals', 'motivations': 'Motivations', 'weaknesses': 'Weaknesses', 'equipment': 'Equipment', 'relationships': 'Relationships', 'notes': 'Additional Notes'
+                };
+
+                let promptText = '';
+                let isAnyFieldFilled = false;
+                let isAnyBoxChecked = false;
+                let sectionsToGenerate = [];
+                let userDataPrompt = 'Please generate a detailed character profile based on the following user-provided information. Flesh out the character, ensuring all details are coherent.\n\n';
+                
+                for (const key of fieldOrder) {
+                    const value = formData.get(key);
+                    const checkbox = document.getElementById(`cb-${key}`);
+                    if (value && value.trim()) {
+                        isAnyFieldFilled = true;
+                        userDataPrompt += `## ${fieldMapping[key]}\n${value.trim()}\n\n`;
+                    }
+                    if (checkbox.checked) {
+                        isAnyBoxChecked = true;
+                        if (!value || !value.trim()) { sectionsToGenerate.push(fieldMapping[key]); }
+                    }
+                }
+                
+                if (isAnyFieldFilled) {
+                    promptText = userDataPrompt;
+                    if (sectionsToGenerate.length > 0) { promptText += `\nPlease also generate original content for the following empty sections: ${sectionsToGenerate.join(', ')}.`; }
+                } else if (isAnyBoxChecked) {
+                    promptText = `Generate a complete and detailed original character profile from scratch. The character should be interesting and well-developed. Please include detailed sections for the following: ${sectionsToGenerate.join(', ')}.`;
+                } else {
+                    displayError("No fields to generate.", "Please check the box next to at least one field you want the AI to generate.");
+                    return;
+                }
+
+                const outputFormat = document.getElementById('output-format').value;
+                if (outputFormat === 'Character Workup') {
+                    promptText += `\n\nFinally, format the entire output as a comprehensive 'Character Workup' document. Use the field names as clear, bold headings (e.g., **Appearance**, **Backstory**) and present the information in a well-written, narrative style under each heading. Do not use Markdown ## headers in the final output.`;
+                } else {
+                    promptText += `\n\nFinally, format the entire output as a single ${outputFormat} document. Do not include any text or explanations outside of the ${outputFormat} structure.`;
+                }
+
+                const textOutput = await callGemini(promptText);
+                if (textOutput) {
+                    outputEl.textContent = textOutput;
+                    generateBtn.classList.add('hidden');
+                    reformatBtn.classList.remove('hidden');
+                }
+            }
+
+            async function reformatOutput() {
+                const existingText = outputEl.textContent;
+                if (!existingText || outputEl.querySelector('.error-message')) {
+                    alert("There is no generated text to reformat.");
+                    return;
+                }
+
+                const newFormat = document.getElementById('output-format').value;
+                let promptText = `You are a text formatting expert. Your task is to convert the following character profile into the specified format. It is crucial that you do not add, remove, or change any of the character's information; only change the formatting.\n\nNew Format: ${newFormat}\n\n--- Start of Character Profile ---\n\n${existingText}\n\n--- End of Character Profile ---`;
+
+                const textOutput = await callGemini(promptText);
+                 if (textOutput) {
+                    outputEl.textContent = textOutput;
+                }
+            }
+            
+            // --- Utility Functions (Save, Copy) ---
+            function saveAsTextFile() {
+                const textToSave = outputEl.textContent;
+                if (!textToSave || outputEl.querySelector('.error-message')) {
+                    alert("There is no content to save.");
+                    return;
+                }
+                let characterName = '';
+                const userInputName = nameInput.value.trim();
+                if (userInputName) {
+                    characterName = userInputName;
+                } else {
+                    try {
+                        const jsonData = JSON.parse(textToSave);
+                        if (jsonData.name) characterName = jsonData.name;
+                    } catch (e) {
+                        const nameMatch = textToSave.match(/^(?:\*\*|##\s*)?Name\b\s*:\s*(.*)/im);
+                        if (nameMatch && nameMatch[1]) characterName = nameMatch[1].trim();
+                    }
+                }
+                const sanitizedName = (characterName.trim().replace(/[^a-z0-9]/gi, '_').toLowerCase()) || 'character';
+                const filename = `${sanitizedName}_profile.txt`;
+                const blob = new Blob([textToSave], { type: 'text/plain;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.setAttribute('href', url);
+                link.setAttribute('download', filename);
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+            }
+
+            function copyToClipboard() {
+                const textToCopy = outputEl.textContent;
+                if (textToCopy && !outputEl.querySelector('.error-message')) {
+                    const tempTextArea = document.createElement('textarea');
+                    tempTextArea.value = textToCopy;
+                    document.body.appendChild(tempTextArea);
+                    tempTextArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(tempTextArea);
+                    copyFeedbackEl.textContent = 'Copied!';
+                    setTimeout(() => { copyFeedbackEl.textContent = ''; }, 2000);
+                }
+            }
+
+            // --- Event Listeners ---
+            generateBtn.addEventListener('click', generatePrompt);
+            reformatBtn.addEventListener('click', reformatOutput);
+            copyBtn.addEventListener('click', copyToClipboard);
+            saveBtn.addEventListener('click', saveAsTextFile);
+        });
+    </script>
+</body>
+</html>
+
+
