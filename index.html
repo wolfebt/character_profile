@@ -110,7 +110,7 @@
     </style>
 </head>
 <!-- Updated body class to use the correct URL for the background image -->
-<body class="bg-[url('spaceport-background.jpg')] bg-cover bg-center text-gray-300">
+<body class="bg-[url('files/uploaded:spaceport-background.jpg-26865fc5-4092-4e34-a581-7285be4a474a')] bg-cover bg-center text-gray-300">
 
     <!-- Main Container -->
     <div class="container mx-auto p-4 sm:p-6 lg:p-8 relative">
@@ -471,15 +471,19 @@
                     return;
                 }
 
-                let basePrompt = `You are a creative writer tasked with completing and refining a character profile.\n\n`;
-                basePrompt += `**USER-PROVIDED DATA:**\nHere is the information provided by the user. Use this as the primary context for the entire character.\n`;
-                basePrompt += allFieldsData.join('\n') + '\n\n';
+                // Modified prompt to be more direct and avoid conversational filler
+                let basePrompt = `Generate a complete and cohesive character profile based on the following data.
+**USER-PROVIDED DATA:**
+Here is the information provided by the user. Use this as the primary context for the entire character.
+${allFieldsData.join('\n')}
 
-                basePrompt += `**YOUR TASK:**\nYour goal is to create a single, complete, and cohesive character profile based on the data above. Follow these rules:\n`;
-                basePrompt += `1. **Integrate Existing Data:** All non-empty fields from the "USER-PROVIDED DATA" must be thoughtfully integrated into the final character.\n`;
-                basePrompt += `2. **Generate and Refine:** You must generate new, compelling content for any empty fields. Additionally, you must specifically focus on the following sections, even if they already have content: **${sectionsToGenerate.join(', ')}**. For these specific sections, treat any existing user data as a suggestion to be expanded upon, refined, or improved to create a more compelling character.\n\n`;
+**YOUR TASK:**
+Your goal is to create a single, complete, and cohesive character profile based on the data above. Follow these rules:
+1. **Integrate Existing Data:** All non-empty fields from the "USER-PROVIDED DATA" must be thoughtfully integrated into the final character.
+2. **Generate and Refine:** You must generate new, compelling content for any empty fields. Additionally, you must specifically focus on the following sections, even if they already have content: **${sectionsToGenerate.join(', ')}**. For these specific sections, treat any existing user data as a suggestion to be expanded upon, refined, or improved to create a more compelling character.
 
-                basePrompt += `**OUTPUT FORMAT:**\nReturn the **complete and final character profile** as a single document. Use each field name from the original list as a bold heading (e.g., **Name**), followed by the full content for that section. Ensure every single field is present in your output.`;
+**OUTPUT FORMAT:**
+Return the **complete and final character profile** as a single document. Use each field name from the original list as a bold heading (e.g., **Name**), followed by the full content for that section. Ensure every single field is present in your output.`;
                 
                 const workupPrompt = basePrompt;
 
